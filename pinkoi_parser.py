@@ -1,8 +1,22 @@
 from bs4 import BeautifulSoup
 import urllib
 import time
+import sys
 
-Url = "http://www.pinkoi.com/browse/%E9%85%8D%E4%BB%B6%E9%A3%BE%E5%93%81?category=2&archive=0&sortby=rank&order=desc&p=3"
+
+#Url = "http://www.pinkoi.com/browse/%E9%85%8D%E4%BB%B6%E9%A3%BE%E5%93%81?category=2&archive=0&sortby=rank&order=desc&p=3"
+
+category = sys.argv[1]
+categories = {}
+categories['0'] = "clothes"
+categories['1'] = "bag_shoes"
+categories['2'] = "accessory"
+categories['3'] = "stationery"
+categories['11'] = "3C"
+
+
+Url = "http://www.pinkoi.com/browse?category=%s&archive=0&sortby=rank&order=desc&p=2" % category
+filename = categories[category] + ".txt"
 web_url = "http://www.pinkoi.com"
 
 
@@ -42,6 +56,14 @@ def get_photo(url):
     urllib.urlretrieve(url, dir_name+photo_name)
 
 
+def create_url(url):
+    url_list = []
+    for index in range(1, 41):
+        url_list.append(url[:-1]+str(index))
+    return url_list
+
 if __name__ == "__main__":
-    lists = map(lambda x: get_photo_url(x), get_photo_list(Url))
-    write_into_file("accessory.txt", lists)
+    url_list = create_url(Url)
+    for url in url_list:
+        lists = map(lambda x: get_photo_url(x), get_photo_list(url))
+        write_into_file(filename, lists)
