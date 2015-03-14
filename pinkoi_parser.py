@@ -12,6 +12,10 @@ categories['0'] = "clothes"
 categories['1'] = "bag_shoes"
 categories['2'] = "accessory"
 categories['3'] = "stationery"
+categories['5'] = "daily"
+categories['8'] = "DIY"
+categories['9'] = "life"
+categories['10'] = "food"
 categories['11'] = "3C"
 
 
@@ -58,7 +62,7 @@ def get_photo(url):
 
 def create_url(url):
     url_list = []
-    for index in range(1, 41):
+    for index in range(1, 71):
         url_list.append(url[:-1]+str(index))
     return url_list
 
