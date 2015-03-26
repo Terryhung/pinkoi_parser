@@ -79,3 +79,5 @@ if __name__ == "__main__":
     for url in url_list:
         lists = map(lambda x: get_photo_url(x), get_photo_list(url))
         write_into_file(filename, lists)
+    _str = "Finish %s" % category
+    print _str
