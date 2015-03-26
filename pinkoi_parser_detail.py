@@ -54,9 +54,10 @@ def get_photo_list(url):
 
 def write_into_file(file_name, _list):
     filename = "url_list/%s" % file_name
-    _file = open(filename, 'w')
+    _file = open(filename, 'a')
     for urls in _list:
-        _file.write(','.join(urls)+"\n")
+        photo_name = urls[1].split("/")[4]
+        _file.write(",".join(urls) + "," + photo_name + "," + category + "\n")
         get_photo(urls[1])
 
 
